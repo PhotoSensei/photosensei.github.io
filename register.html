@@ -25,6 +25,32 @@
 	<script src="js/modernizr-2.6.2.min.js"></script>
 
 	</head>
+    <style>
+        input[type=text], select {
+        width: 50%;
+        padding: 2px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;}
+
+    .button {
+        background-color: #f6646a; 
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .button1 {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    </style>
 	<body>
 		
 	<div class="gtco-loader"></div>
@@ -81,7 +107,7 @@
 					<div class="col-md-10 animate-box">
 					<h3>Signing up is <strong>100% FREE</strong> and enables you to make full use of the web site.<br />Fields marked with an asterisk * are required.</h3>
                         <form action="" method="POST" name="SignUp" id="SignUp">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="3">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="50">
                                 <tr>
                                     <td width="28%"><div align="right"><strong>*Name </strong></div></td>
                                     <td width="72%">
@@ -456,8 +482,9 @@
                                 </tr>
                                 <tr>
                                     <td valign="top"><div align="right"><strong>*Native Language</strong></div></td>
-                                    <td valign="top">
-                                        <div id="optNL" style="position:relative;"> </div>
+                                    <td>
+                                        <input name="nativel" type="text" id="nativl" value="" size="22" maxlength="25" class="ui-widget">
+                                        &nbsp;<span id="errlang" class="errors"> </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -467,14 +494,15 @@
                                 <tr>
                                     <td width="190" valign="top"><div align="right"><strong>*Practicing Language</strong></div></td>
                                     <td>
-                                        <div id="optPL" style="position:relative;"> </div>
+                                        <input name="pracl" type="text" id="pracl" value="" size="22" maxlength="25" class="ui-widget">
+                                        &nbsp;<span id="errplang" class="errors"> </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         <FIELDSET>
                                             <LEGEND><strong>*Type of Exchange</strong></LEGEND>
-                                            <table border="0" cellpadding="2">
+                                            <table border="0" cellpadding="10">
                                                 <tr>
                                                     <td><div align="right">Face to face conversation</div></td>
                                                     <td>
@@ -485,23 +513,9 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><div align="right">Correspondence (Pen-Pal)</div></td>
-                                                    <td>
-                                                        <select name="penpal" id="penpal">
-                                                            <option value="0">No</option>
-                                                            <option value="1">Yes</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><div align="right">Using a chat software</div></td>
-                                                    <td>
-                                                        <select name="chatsoft" id="chatsoft">
-                                                            <option value='0'>No</option>
-                                                            <option value="1">Skype</option>
-                                                            <option value="5">Hangouts</option>
-                                                            <option value="16">WhatsApp</option>
-                                                        </select>
+                                                    <td align="left">
+                                                        <input type="checkbox" id="exF" name="exF" value="1">
+                                                        Using a chat software
                                                     </td>
                                                 </tr>
                                             </table>
@@ -510,7 +524,7 @@
                                     </td>
                                 </tr>
                                 <tr class="spaceTop">
-                                    <td valign="top"><div align="right">Hobbies and interests</div></td>
+                                    <td valign="top"><div align="left">Hobbies and interests</div></td>
                                     <td>
                                         <input name="interests" type="text" id="interests" value="" size="40" maxlength="100" onBlur="checkAndModifyInterests();" class="ui-widget"><br>
                                         <span class="small08">Example: Tennis, movies, cooking</span>
@@ -534,53 +548,13 @@
                                             <LEGEND><strong>*Description</strong></LEGEND>
                                             <p class="small09"><span class="important1">Important: A profile may be rejected if the primary reason for subscribing is not language exchange. You may not enter any personal or sensitive personal information.</span></p>
                                             <p align="center">
-                                                <textarea name="Description" cols="80" rows="7" id="Description" onKeyDown="textCounter('Description','chr_left',500);" onKeyUp="textCounter('Description','chr_left',500);" onBlur="checkAndModifyDescription();" class="ui-widget"></textarea>
-                                                <br>(&nbsp;<span id="chr_left" class="small09"> </span>&nbsp;characters available )
+                                                <textarea name="Description" cols="80" rows="7" id="Description"onBlur="checkAndModifyDescription();" class="ui-widget"></textarea>  
                                             </p>
                                             <span id="errDescription" class="errors"> </span>
                                         </FIELDSET>
                                     </td>
                                 </tr>
-                                <tr class="spaceTop">
-                                    <td colspan="2">
-                                        <FIELDSET>
-                                            <LEGEND><strong>*E-mail</strong></LEGEND>
-                                            <p class="small09">
-                                                We will not show or give your e-mail address to anyone for any reason
-                                                <a href="javascript:;" onClick="showLearnMore();">Learn more</a>
-                                            </p>
-                                            <table border="0" cellspacing="0" cellpadding="0" onpaste="return false;" oncut="return false;" oncopy="return false;" oncontextmenu="return false;">
-                                                <tr>
-                                                    <td><div align="right">E-mail&nbsp;</div></td>
-                                                    <td><input name="Email" type="text" id="Email" value="" class="ui-widget" size="38" maxlength="100" autocomplete="off" autocorrect="off" autocapitalize="off"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><div align="right">Re-enter E-mail&nbsp; </div></td>
-                                                    <td><input name="Re_enter_Email" type="text" id="Re_enter_Email" value="" class="ui-widget" size="38" maxlength="100" autocomplete="off" autocorrect="off" autocapitalize="off"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td><span id="errEmail" class="errors"> </span></td>
-                                                </tr>
-                                            </table>
-                                        </FIELDSET>
-                                    </td>
-                                <tr class="spaceTop" onpaste="return false;" oncut="return false;" oncopy="return false;" oncontextmenu="return false;">
-                                    <td><div align="right"><strong>*Password</strong></div></td>
-                                    <td><input name="Password1" type="password" id="Password1" value="" class="ui-widget" size="25" maxlength="20">&nbsp;&nbsp;( 6-20 Characters )</td>
-                                </tr>
-                                <tr onpaste="return false;" oncut="return false;" oncopy="return false;" oncontextmenu="return false;">
-                                    <td><div align="right"><strong>*Re-enter Password</strong></div></td>
-                                    <td><input name="Password2" type="password" id="Password2" value="" class="ui-widget" size="25" maxlength="20"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><span id="errPassword" class="errors"> </span></td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                             
                                 <tr class="spaceTop">
                                     <td colspan="2">
                                         <input type="checkbox" name="policy_privacy_accept" id="policy_privacy_accept" value="1">
@@ -593,7 +567,7 @@
                                     <td colspan="2">
                                         <div align="center">
                                             <input type="hidden" id="lg" name="lg" value="en">
-                                            <button id="sign_up">REGISTER</button>
+                                            <button class="button button1"id="sign_up">REGISTER</button>
                                         </div>
                                     </td>
                                 </tr>
